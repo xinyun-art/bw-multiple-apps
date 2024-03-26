@@ -1,10 +1,16 @@
 <template>
   <div class="home">
     <div class="banner">
-      这是banner
+      {{ $t('这是banner') }}
     </div>
     <div class="game">
-      这是game
+      {{ $t('这是content') }}
+      <HelloWorld msg="It is message" />
+      <ul>
+        <li v-for="item in games" :key="item.id">
+          {{ item.venueTypeName }}
+        </li>
+      </ul>
     </div>
   </div>
 </template>
@@ -12,14 +18,30 @@
 <script setup lang="ts">
 import { queryGameAssortList } from '@/apis/game'
 
+const instance = getCurrentInstance()
+const $t = instance?.proxy?.$t
+console.log('ins--', instance)
+console.log('ins--', instance?.proxy?.$t)
+
 const router = useRouter()
+const games = ref([
+  {
+    id: 0,
+    venueTypeCode: 'cp',
+    venueTypeName: $t('彩票'),
+  },
+  {
+    id: 1,
+    venueTypeCode: 'ty',
+    venueTypeName: $t('体育'),
+  }
+])
 
 onMounted(async () => {
   console.log('router--', router)
   
   const data = await queryGameAssortList()
   console.log('data--', data)
-  
 })
 </script>
 

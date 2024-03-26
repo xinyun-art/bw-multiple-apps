@@ -12,15 +12,21 @@
     "build-only": "vite build",
     "type-check": "vue-tsc --build --force",
     "lint": "eslint . --ext .vue,.js,.jsx,.cjs,.mjs,.ts,.tsx,.cts,.mts --fix --ignore-path .gitignore",
-    "format": "prettier --write src/"
+    "format": "prettier --write src/",
+    "i18nScan": "i18next-scanner --config scripts/i18next-scaner.config.cjs",
+    "i1n8Scan-1": "i18next-scanner --config src/i18n/i18next-scaner.config.js && node src/i18n/json2Excel.js",
+    "i18n2Excel": "node scripts/json2Excel.cjs",
+    "i18n2Json": "node scripts/excel2Json.cjs"
   },
   "dependencies": {
     "axios": "^1.6.8",
+    "crc": "^4.3.2",
     "crypto-js": "^4.2.0",
     "js-md5": "^0.8.3",
     "pako": "^2.1.0",
     "pinia": "^2.1.7",
     "vue": "^3.4.21",
+    "vue-i18n": "^9.10.2",
     "vue-router": "^4.3.0"
   },
   "devDependencies": {
@@ -35,11 +41,17 @@
     "cross-env": "^7.0.3",
     "eslint": "^8.49.0",
     "eslint-plugin-vue": "^9.17.0",
+    "fs": "0.0.1-security",
+    "i18next-scanner": "^4.4.0",
+    "json2xls": "^0.1.2",
+    "node-xlsx": "^0.23.0",
     "npm-run-all2": "^6.1.2",
+    "path": "^0.12.7",
     "prettier": "^3.0.3",
     "sass": "^1.72.0",
     "typescript": "~5.4.0",
     "unplugin-auto-import": "^0.17.5",
+    "unplugin-vue-components": "^0.26.0",
     "vite": "^5.1.5",
     "vue-tsc": "^2.0.6"
   }

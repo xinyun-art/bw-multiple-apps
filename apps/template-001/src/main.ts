@@ -5,6 +5,7 @@ import { createApp } from 'vue'
 import App from './App.vue'
 import { setupRouter } from './router'
 import { setupStore } from './stores'
+import { setupI18n, lang, _lang } from './i18n'
 
 console.log('main.js-import.meta.env--', import.meta.env)
 
@@ -26,6 +27,11 @@ const bootstrap = (): void => {
   setupStore(app)
   // 安装初始化路由
   setupRouter(app)
+  // 安装初始化i18n
+  setupI18n(app)
+
+  app.config.globalProperties.$t = lang
+  app.config.globalProperties.$tt = _lang
 
   app.config.errorHandler = (err, vm, info) => {
     console.log('全局错误---:', err, vm, info)

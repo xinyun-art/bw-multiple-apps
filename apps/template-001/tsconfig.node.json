@@ -7,7 +7,7 @@
     "nightwatch.conf.*",
     "playwright.config.*"
   ],
-  "exclude": ["configs/**/*"],
+  "exclude": ["configs/**/*", "scripts/**/*"],
   "compilerOptions": {
     "composite": true,
     "noEmit": true,
