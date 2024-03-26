@@ -16,6 +16,8 @@ module.exports = {
     'vue/multi-word-component-names': 'off'
   },
   globals: {
-    'process': true
+    'process': true,
+    'require': true,
+    '__dirname': true
   }
 }

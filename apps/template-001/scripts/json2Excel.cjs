@@ -7,7 +7,6 @@ const getPathInfo = (p) => path.parse(p)
  * @param {String} directory 文件目录
  * @param {Boolean} useSubdirectories 是否查询子目录，默认false
  * @param {array} extList 查询文件后缀，默认 ['.js']
- *
  */
 function autoLoadFile(directory, useSubdirectories = false, extList = ['.js']) {
   const filesList = []
@@ -55,6 +54,6 @@ fileList.forEach((_, i) => {
     }
   }
 })
-
+console.log('data--', data)
 // 导出excel文件
 fs.writeFileSync('./src/i18n/i18n.xlsx', json2xls(data), 'binary')

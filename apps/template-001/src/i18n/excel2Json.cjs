@@ -2,8 +2,8 @@ const xlsx = require('node-xlsx')
 const fs = require('fs')
 const path = require('path')
 
-const sourcePath = '../src/i18n'
-const savePath = '../src/i18n/json'
+const sourcePath = './'
+const savePath = './json'
 const excelName = 'i18n.xlsx'
 
 class Translate {
