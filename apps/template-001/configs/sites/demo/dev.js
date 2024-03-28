@@ -11,7 +11,7 @@ export default {
   SITE_ENV: 'dev',
   SITE_CODE: 'demo',
   SITE_TITLE: 'DEMO',
-  SITE_THEME: '001',
+  SITE_THEME: 'theme-001',
   SITE_KEY: 'uKGOh/gaKhjb9CXu',
   SITE_SECRET_VERSION: '1',
   SITE_ENCRYPTED: '0',

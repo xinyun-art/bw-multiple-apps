@@ -11,13 +11,5 @@ module.exports = {
   ],
   parserOptions: {
     ecmaVersion: 'latest'
-  },
-  rules: {
-    'vue/multi-word-component-names': 'off'
-  },
-  globals: {
-    'process': true,
-    'require': true,
-    '__dirname': true
   }
 }

@@ -10,7 +10,7 @@ import { setupI18n, lang, _lang } from './i18n'
 console.log('main.js-import.meta.env--', import.meta.env)
 
 const theme = import.meta.env.SITE_THEME
-import(`./assets/styles/themes/${theme}/index.scss`)
+import(`./assets/styles/themes/theme-${theme}/index.scss`)
 
 const toggle = (theme: string): void => {
   document.documentElement.classList.toggle(theme)

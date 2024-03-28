@@ -2,7 +2,7 @@ const xlsx = require('node-xlsx')
 const fs = require('fs')
 const path = require('path')
 
-const sourcePath = './'
+const sourcePath = '../src/i18n'
 const savePath = '../src/i18n/json'
 const excelName = 'i18n.xlsx'
 

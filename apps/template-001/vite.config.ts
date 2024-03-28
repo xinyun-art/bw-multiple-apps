@@ -25,6 +25,7 @@ export default defineConfig((ctx) => {
     define: {
       ...normalizeConfigs(siteEnvConfigs, 'import.meta.env.')
     },
+    base: './',
     resolve: {
       alias: {
         '@': fileURLToPath(new URL('./src', import.meta.url))

@@ -6,6 +6,7 @@
   "scripts": {
     "serve:dev:demo": "cross-env site_code=demo site_env=dev vite serve",
     "serve:dev:yb": "cross-env site_code=yb site_env=dev vite serve",
+    "build:dev:yb": "cross-env site_code=demo site_env=dev vite build",
     "dev": "vite",
     "build": "run-p type-check \"build-only {@}\" --",
     "preview": "vite preview",
@@ -13,13 +14,12 @@
     "type-check": "vue-tsc --build --force",
     "lint": "eslint . --ext .vue,.js,.jsx,.cjs,.mjs,.ts,.tsx,.cts,.mts --fix --ignore-path .gitignore",
     "format": "prettier --write src/",
-    "i18nScan": "i18next-scanner --config scripts/i18next-scaner.config.cjs",
-    "i1n8Scan-1": "i18next-scanner --config src/i18n/i18next-scaner.config.js && node src/i18n/json2Excel.js",
+    "scan": "i18next-scanner --config scripts/i18next-scaner.config.cjs",
+    "i1n8Scan": "i18next-scanner --config src/i18n/i18next-scaner.config.js && node src/i18n/json2Excel.js",
     "i18n2Excel": "node scripts/json2Excel.cjs",
     "i18n2Json": "node scripts/excel2Json.cjs"
   },
   "dependencies": {
-    "axios": "^1.6.8",
     "crc": "^4.3.2",
     "crypto-js": "^4.2.0",
     "js-md5": "^0.8.3",

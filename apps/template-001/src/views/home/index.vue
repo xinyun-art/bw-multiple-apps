@@ -1,6 +1,6 @@
 <template>
   <div class="home">
-    <div class="banner">
+    <div class="banner text-3xl font-bold underline">
       {{ $t('这是banner') }}
     </div>
     <div class="game">
