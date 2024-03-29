@@ -1,6 +1,6 @@
-export * from './require.ts'
+export * from './src/request'
 
-import HttpRequest from './require.ts'
+import HttpRequest from './src/request'
 
 export default {
   HttpRequest
