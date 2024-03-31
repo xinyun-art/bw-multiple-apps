@@ -1,3 +1,10 @@
+
+// const style = document.createElement('style');
+// style.setAttribute('type', 'text/css');
+//           style.innerHTML = `html.theme-001 {
+//             --white11: #cccccc;
+//             --black11: #000000;}`;
+//           document.head.appendChild(style);
 import './assets/main.css'
 
 import { createApp } from 'vue'
@@ -17,6 +24,8 @@ const toggle = (theme: string): void => {
 }
 toggle(`theme-${theme}`)
 
+// const cssModule = import.meta.glob('./assets/styles/themes/**/*.scss')
+// console.log('cssModule--', cssModule)
 /**
  * 定义启动初始化函数
  */

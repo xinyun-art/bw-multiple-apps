@@ -6,7 +6,8 @@
   "scripts": {
     "serve:dev:demo": "cross-env site_code=demo site_env=dev vite serve",
     "serve:dev:yb": "cross-env site_code=yb site_env=dev vite serve",
-    "build:dev:yb": "cross-env site_code=demo site_env=dev vite build",
+    "build:dev:demo": "cross-env site_code=demo site_env=dev vite build",
+    "build:dev:yb": "cross-env site_code=yb site_env=dev vite build",
     "dev": "vite",
     "build": "run-p type-check \"build-only {@}\" --",
     "preview": "vite preview",

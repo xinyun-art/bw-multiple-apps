@@ -6,12 +6,14 @@ import vueJsx from '@vitejs/plugin-vue-jsx'
 import AutoImport from 'unplugin-auto-import/vite'
 import Components from 'unplugin-vue-components/vite'
 import { normalizeConfigs, siteEnvConfigs } from './configs/index'
+import StyleInject from './plugins/style-inject/index'
 
 // https://vitejs.dev/config/
 export default defineConfig((ctx) => {
   return {
     plugins: [
       vue(),
+      StyleInject({ env: siteEnvConfigs }),
       vueJsx(),
       AutoImport({
         imports: ['vue', 'vue-router', 'pinia'],
