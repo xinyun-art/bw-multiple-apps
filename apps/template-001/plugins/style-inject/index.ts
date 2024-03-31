@@ -1,25 +1,24 @@
 import fs from 'fs'
+import path from 'path'
 import { minify } from 'terser'
 import CleanCSS from 'clean-css'
 
-export default async function styleInjectPlugin(params) {
-  console.log('params--', params)
+export default async function styleInjectPlugin(options) {
+  console.log('options--', options)
 
-  const { site_code, site_env } = process.env
-  console.log('site_code--',site_code)
-  console.log('site_env--',site_env)
-  console.log('params-SITE_THEME--',params.env.SITE_THEME)
+  const { css } = options
+  const paths = css.map(path => (`import '${path}';`)).join('')
+  console.log('paths--', paths)
 
   console.log('buildStart--')
-  const m = fs.readFileSync(`./src/assets/styles/themes/theme-${params.env.SITE_THEME}/index.scss`, "utf8")
-  // console.log('m--', m)
-  const input = 'a{font-weight:bold;}';
-  const options = { /* options */ };
-  const mm = new CleanCSS(options).minify(input);
-  console.log('mm--', mm)
+  // const output = fs.readFileSync(`./src/assets/styles/themes/theme-${params.env.SITE_THEME}/index.scss`, "utf8")
+  // const cleanCss = new CleanCSS({}).minify(output);
+  // const outputStr = JSON.stringify(cleanCss.styles)
+  // console.log('outputStr--', outputStr)
 
+  // const pa = path.join(__dirname, `../../src/assets/styles/themes/theme-${params.env.SITE_THEME}/index.scss`)
   return {
-    name: 'vite:markdown',
+    name: 'vite:style-inject',
 
     enforce: 'pre',
 
@@ -27,25 +26,20 @@ export default async function styleInjectPlugin(params) {
     },
 
     transform(code, id, opt) {
-      // console.log('code--', code)
       if (id.endsWith('main.ts')) {
-        console.log('code--', code)
-        return `${code}\nif (typeof window !== 'undefined') {
-          const style = document.createElement('style');
-          style.innerHTML = ${mm.styles};
-          document.head.appendChild(style);
-        }`
+        // console.log('code--', code)
+        return `${paths};\n${code}`
       }
-      return code
       // if (id.endsWith('main.ts')) {
       //   console.log('code--', code)
-      //   return `${code}\nif (typeof window !== 'undefined') {
+      //   return `if (typeof window !== 'undefined') {
       //     const style = document.createElement('style');
-      //     style.innerHTML = 'html.theme-001 {--white11: #cccccc;--black11: #000000;};'
+      //     style.setAttribute('type', 'text/css');
+      //     style.innerHTML = ${outputStr};
       //     document.head.appendChild(style);
-      //   }`
+      //   }\n${code}`
       // }
-      // return code
+      return code
     }
   }
 }
