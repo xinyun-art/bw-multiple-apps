@@ -1,51 +1,57 @@
 import fs from 'fs'
-import { minify } from 'terser'
-import CleanCSS from 'clean-css'
+import { getCurrentFile, getCurrentDir } from '../../node/path'
+interface Options {
+  css: CssPaths
+}
+interface CssPath {
+  dynamicImport?: boolean
+  url: string
+}
+type CssPaths = (CssPath | string)[]
 
-export default async function styleInjectPlugin(params) {
-  console.log('params--', params)
+const readFiles = (dir: string) => {
+  const fileInfo = fs.readdirSync(dir)
+  console.log('fileInfo--', fileInfo)
 
-  const { site_code, site_env } = process.env
-  console.log('site_code--',site_code)
-  console.log('site_env--',site_env)
-  console.log('params-SITE_THEME--',params.env.SITE_THEME)
+  console.log('__filename--', getCurrentFile())
 
-  console.log('buildStart--')
-  const m = fs.readFileSync(`./src/assets/styles/themes/theme-${params.env.SITE_THEME}/index.scss`, "utf8")
-  // console.log('m--', m)
-  const input = 'a{font-weight:bold;}';
-  const options = { /* options */ };
-  const mm = new CleanCSS(options).minify(input);
-  console.log('mm--', mm)
+  console.log('__dirname--', getCurrentDir())
+}
+
+export default async function styleInjectPlugin(options: Options) {
+  readFiles('src/boot')
+  const { css } = options
+  console.log('css--', css)
+  let pathImps:string = ''
+  css.forEach(cssPath => {
+    if (typeof cssPath === 'string') {
+      pathImps += `import '${cssPath}';`
+    } else if (Object.prototype.toString.call(cssPath) === '[object Object]') {
+      if (!cssPath.dynamicImport) {
+        pathImps += `import '${cssPath.url}';`
+      } else {
+        pathImps += `import('${cssPath.url}');`
+      }
+    } else {
+      throw new Error('数组项类型只能为string或CssPath对象类型')
+    }
+  })
+  console.log('pathImps--', pathImps)
 
   return {
-    name: 'vite:markdown',
+    name: 'vite:style-inject',
 
     enforce: 'pre',
 
     buildStart() {
+      console.log('buildStart--')
     },
 
-    transform(code, id, opt) {
-      // console.log('code--', code)
+    transform(code: any, id: any, opt: any) {
       if (id.endsWith('main.ts')) {
-        console.log('code--', code)
-        return `${code}\nif (typeof window !== 'undefined') {
-          const style = document.createElement('style');
-          style.innerHTML = ${mm.styles};
-          document.head.appendChild(style);
-        }`
+        return `${pathImps};\n${code}`
       }
       return code
-      // if (id.endsWith('main.ts')) {
-      //   console.log('code--', code)
-      //   return `${code}\nif (typeof window !== 'undefined') {
-      //     const style = document.createElement('style');
-      //     style.innerHTML = 'html.theme-001 {--white11: #cccccc;--black11: #000000;};'
-      //     document.head.appendChild(style);
-      //   }`
-      // }
-      // return code
     }
   }
 }

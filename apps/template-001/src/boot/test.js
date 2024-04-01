@@ -1,0 +1,1 @@
+const a = '我是test，boot！'

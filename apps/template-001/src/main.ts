@@ -1,10 +1,3 @@
-
-// const style = document.createElement('style');
-// style.setAttribute('type', 'text/css');
-//           style.innerHTML = `html.theme-001 {
-//             --white11: #cccccc;
-//             --black11: #000000;}`;
-//           document.head.appendChild(style);
 import './assets/main.css'
 
 import { createApp } from 'vue'
@@ -17,7 +10,7 @@ import { setupI18n, lang, _lang } from './i18n'
 console.log('main.js-import.meta.env--', import.meta.env)
 
 const theme = import.meta.env.SITE_THEME
-import(`./assets/styles/themes/theme-${theme}/index.scss`)
+// import(`./assets/styles/themes/${theme}/index.scss`)
 
 const toggle = (theme: string): void => {
   document.documentElement.classList.toggle(theme)
