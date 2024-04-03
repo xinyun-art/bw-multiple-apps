@@ -3,7 +3,8 @@
   "private": true,
   "type": "module",
   "scripts": {
-    "serve": "pnpm -C apps/demo1 dev",
+    "serve:demo1": "pnpm -C apps/demo1 dev",
+    "serve:dev:demo": "pnpm --filter template-001 serve:dev:demo",
     "build": "turbo build",
     "build/r": "rollup --config",
     "dev": "turbo dev",

@@ -1,5 +1,15 @@
 import fs from 'fs'
-import { getCurrentFile, getCurrentDir } from '../../node/path'
+import { fileURLToPath } from 'node:url'
+import { dirname, join, resolve } from 'node:path'
+
+export const getCurrentFile = () => fileURLToPath(import.meta.url)
+
+export const getCurrentDir = () => {
+  const __filename = fileURLToPath(import.meta.url)
+  const __dirname = dirname(__filename)
+  return __dirname
+}
+
 interface Options {
   css: CssPaths
 }
@@ -10,12 +20,11 @@ interface CssPath {
 type CssPaths = (CssPath | string)[]
 
 const readFiles = (dir: string) => {
-  const fileInfo = fs.readdirSync(dir)
-  console.log('fileInfo--', fileInfo)
+  const files = fs.readdirSync(dir)
+  console.log('files--', files)
 
-  console.log('__filename--', getCurrentFile())
-
-  console.log('__dirname--', getCurrentDir())
+  const paths = files.map(filename => resolve(process.cwd(), dir, filename))
+  console.log('paths--', paths)
 }
 
 export default async function styleInjectPlugin(options: Options) {
