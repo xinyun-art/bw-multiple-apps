@@ -1,6 +1,6 @@
 import fs from 'fs'
 import { fileURLToPath } from 'node:url'
-import { dirname, join, resolve } from 'node:path'
+import { dirname, resolve } from 'node:path'
 
 export const getCurrentFile = () => fileURLToPath(import.meta.url)
 
@@ -11,7 +11,8 @@ export const getCurrentDir = () => {
 }
 
 interface Options {
-  css: CssPaths
+  css: CssPaths,
+  boot?: string[]
 }
 interface CssPath {
   dynamicImport?: boolean
@@ -19,20 +20,46 @@ interface CssPath {
 }
 type CssPaths = (CssPath | string)[]
 
-const readFiles = (dir: string) => {
-  const files = fs.readdirSync(dir)
-  console.log('files--', files)
+const transformPathsToStr = (dir: string, paths: string[]): string[] => {
+  return paths.map(path => resolve(process.cwd(), dir, path))
+}
 
+const getSameItemFormArray = <T>(arr1: T[], arr2: T[]): T[] => {
+  const sameArr: T[] = []
+  for (let i = 0; i < arr1.length; i++) {
+    for (let j = 0; j < arr2.length; j++) {
+      if (arr1[i] === arr2[j] && !sameArr.includes(arr1[i])) {
+        sameArr.push(arr1[1])
+      }
+    }
+  }
+  return sameArr
+}
+
+const readBootFiles = (boot: string[] | undefined): string[] => {
+  if (!boot) return []
+  const bootFiles = fs.readdirSync('src/boot')
+  const sameBoot = getSameItemFormArray(boot, bootFiles)
+  const bootPaths = sameBoot.map(path => resolve(process.cwd(), 'src/boot', path))
+  return bootPaths
+}
+
+const readCssFiles = (css: CssPaths): string[] => {
   const paths = files.map(filename => resolve(process.cwd(), dir, filename))
-  console.log('paths--', paths)
+  return paths
 }
 
 export default async function styleInjectPlugin(options: Options) {
-  readFiles('src/boot')
-  const { css } = options
-  console.log('css--', css)
+  const { css, boot } = options
+  console.log('options-css--', css)
+  console.log('options-boot--', boot)
+  
+  const bootPaths = readBootFiles(boot)
+  const cssPaths = readCssFiles(css)
+  const injectFiles = [...bootPaths, ...cssPaths]
+
   let pathImps:string = ''
-  css.forEach(cssPath => {
+  injectFiles.forEach(cssPath => {
     if (typeof cssPath === 'string') {
       pathImps += `import '${cssPath}';`
     } else if (Object.prototype.toString.call(cssPath) === '[object Object]') {

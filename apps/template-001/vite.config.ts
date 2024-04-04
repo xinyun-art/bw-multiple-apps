@@ -33,7 +33,8 @@ export default defineConfig((ctx) => {
           // {
           //   url: themePath3
           // }
-        ]
+        ],
+        boot: []
       }),
       vueJsx(),
       AutoImport({
