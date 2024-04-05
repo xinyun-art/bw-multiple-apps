@@ -10,18 +10,16 @@ export const getCurrentDir = () => {
   return __dirname
 }
 
+type CssPaths = (CssPath | string)[]
+type Boot = boolean | string[]
+
 interface Options {
   css: CssPaths,
-  boot?: string[]
+  boot?: Boot
 }
 interface CssPath {
   dynamicImport?: boolean
   url: string
-}
-type CssPaths = (CssPath | string)[]
-
-const transformPathsToStr = (dir: string, paths: string[]): string[] => {
-  return paths.map(path => resolve(process.cwd(), dir, path))
 }
 
 const getSameItemFormArray = <T>(arr1: T[], arr2: T[]): T[] => {
@@ -29,24 +27,26 @@ const getSameItemFormArray = <T>(arr1: T[], arr2: T[]): T[] => {
   for (let i = 0; i < arr1.length; i++) {
     for (let j = 0; j < arr2.length; j++) {
       if (arr1[i] === arr2[j] && !sameArr.includes(arr1[i])) {
-        sameArr.push(arr1[1])
+        sameArr.push(arr1[i])
       }
     }
   }
   return sameArr
 }
 
-const readBootFiles = (boot: string[] | undefined): string[] => {
+const readBootFiles = (boot: Boot | undefined): string[] => {
   if (!boot) return []
-  const bootFiles = fs.readdirSync('src/boot')
-  const sameBoot = getSameItemFormArray(boot, bootFiles)
-  const bootPaths = sameBoot.map(path => resolve(process.cwd(), 'src/boot', path))
+  const bootDir = resolve(process.cwd(), 'src/boot')
+  let bootPaths: string[] = []
+  if (typeof boot === 'boolean') {
+    const bootFiles = fs.readdirSync(bootDir)
+    bootPaths = bootFiles.map(path => resolve(bootDir, path))
+  } else if (Array.isArray(boot)) {
+    const bootFiles = fs.readdirSync(bootDir).map(item => item.split('.')[0])
+    const sameBoot = getSameItemFormArray(boot, bootFiles)
+    bootPaths = sameBoot.map(path => resolve(bootDir, path))
+  }
   return bootPaths
-}
-
-const readCssFiles = (css: CssPaths): string[] => {
-  const paths = files.map(filename => resolve(process.cwd(), dir, filename))
-  return paths
 }
 
 export default async function styleInjectPlugin(options: Options) {
@@ -55,11 +55,10 @@ export default async function styleInjectPlugin(options: Options) {
   console.log('options-boot--', boot)
   
   const bootPaths = readBootFiles(boot)
-  const cssPaths = readCssFiles(css)
-  const injectFiles = [...bootPaths, ...cssPaths]
+  console.log('bootPaths--', bootPaths)
 
   let pathImps:string = ''
-  injectFiles.forEach(cssPath => {
+  css.forEach(cssPath => {
     if (typeof cssPath === 'string') {
       pathImps += `import '${cssPath}';`
     } else if (Object.prototype.toString.call(cssPath) === '[object Object]') {
@@ -72,10 +71,13 @@ export default async function styleInjectPlugin(options: Options) {
       throw new Error('数组项类型只能为string或CssPath对象类型')
     }
   })
+  bootPaths.forEach(path => {
+    pathImps += `import '${path}';`
+  })
   console.log('pathImps--', pathImps)
 
   return {
-    name: 'vite:style-inject',
+    name: 'vite:import-advance',
 
     enforce: 'pre',
 
@@ -85,6 +87,7 @@ export default async function styleInjectPlugin(options: Options) {
 
     transform(code: any, id: any, opt: any) {
       if (id.endsWith('main.ts')) {
+        console.log('mian.ts-id--', id)
         return `${pathImps};\n${code}`
       }
       return code

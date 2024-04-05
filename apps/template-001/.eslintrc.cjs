@@ -18,6 +18,7 @@ module.exports = {
   globals: {
     'process': true,
     'require': true,
+    'module': true,
     '__dirname': true
   }
 }

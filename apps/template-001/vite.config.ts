@@ -6,7 +6,7 @@ import vueJsx from '@vitejs/plugin-vue-jsx'
 import AutoImport from 'unplugin-auto-import/vite'
 import Components from 'unplugin-vue-components/vite'
 import { normalizeConfigs, siteEnvConfigs } from './configs/index'
-import StyleInject from './plugins/style-inject/index'
+import ImportAdvance from './plugins/import-advance/index'
 
 const themePath = fileURLToPath(
   new URL(`./src/assets/styles/themes/${siteEnvConfigs.SITE_THEME}/index.scss`, import.meta.url)
@@ -23,7 +23,7 @@ export default defineConfig((ctx) => {
   return {
     plugins: [
       vue(),
-      StyleInject({
+      ImportAdvance({
         css: [
           themePath,
           // {
@@ -34,7 +34,7 @@ export default defineConfig((ctx) => {
           //   url: themePath3
           // }
         ],
-        boot: []
+        boot: ['gt', 'test', 'duck', 'test']
       }),
       vueJsx(),
       AutoImport({
