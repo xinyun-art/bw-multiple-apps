@@ -1,0 +1,53 @@
+html.theme-002 {
+  --white: #ffffff;
+  --black: #000000;
+  --color-1: #316bff;
+  --color-2: #fdaf2a;
+  --color-3: #4f5962;
+  --color-4: #4f5b67;
+  --color-5: #737a8c;
+  --color-6: #9ca1af;
+  --color-7: #8e94a3;
+  --color-8: #f2f3f4;
+  --color-9: #f7f7f7;
+  --color-10: #316bff;
+  --color-11: #b2bbd8;
+  --color-12: #dee2e8;
+  --color-13: #7e8299;
+  --color-14: #f43535;
+  --color-15: #303d47;
+  --color-16: #b7c0db;
+  --color-17: #316bff;
+  --shadow-1: 0px 4px 30px 3px #e6e6e6;
+
+  /** 公共变量---start **/
+
+  // 标题颜色
+  --title1-color: var(--color-3);
+  --title2-color: var(--color-4);
+  --title3-color: var(--color-5);
+  --title4-color: var(--color-6);
+
+  // 正文颜色
+  --text-color: var(--color-6);
+
+  // 背景颜色
+  --header-bg-color: var(--color-15);
+  --card-bg-color: var(--white);
+  --btn-bg-color: var(--color-17);
+
+  // 阴影
+  --card-shadow: var(--shadow-1);
+
+  /** 公共变量---end **/
+
+  /** 模块变量---start **/
+  // home
+  --home-banner: var(--color-11);
+  --home-game: var(--color-12);
+  /** 模块变量---end **/
+
+  /** 此皮肤特有样式---start **/
+
+  /** 此皮肤特有样式---end **/
+}
