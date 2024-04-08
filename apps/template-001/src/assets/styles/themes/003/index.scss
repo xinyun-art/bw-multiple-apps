@@ -1,10 +1,8 @@
 html.theme-003 {
-  --white: #ffffff;
-  --black: #000000;
-  --color-1: #316bff;
-  --color-2: #fdaf2a;
-  --color-3: #4f5962;
-  --color-4: #4f5b67;
+  --color-1: #ffffff;
+  --color-2: #1d4268;
+  --color-3: #205583;
+  --color-4: #141B1F;
   --color-5: #737a8c;
   --color-6: #9ca1af;
   --color-7: #8e94a3;
@@ -29,10 +27,10 @@ html.theme-003 {
   --title4-color: var(--color-6);
 
   // 正文颜色
-  --text-color: var(--color-6);
+  --text-color: var(--color-1);
 
   // 背景颜色
-  --header-bg-color: var(--color-17);
+  --header-bg-color: var(--color-2);
   --card-bg-color: var(--white);
   --btn-bg-color: var(--color-17);
 
