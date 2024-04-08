@@ -18,9 +18,6 @@ const themePath = fileURLToPath(
 //   new URL(`./src/assets/styles/themes/003/index.scss`, import.meta.url)
 // )
 
-const themePath = fileURLToPath(new URL(`./src/assets/styles/themes/theme-${siteEnvConfigs.SITE_THEME}/index.scss`, import.meta.url))
-const themePath2 = fileURLToPath(new URL(`./src/assets/styles/themes/theme-002/index.scss`, import.meta.url))
-
 // https://vitejs.dev/config/
 export default defineConfig((ctx) => {
   return {
