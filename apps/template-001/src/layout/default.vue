@@ -1,9 +1,13 @@
 <template>
-  <header class="header"></header>
+  <Header />
   <main class="main">
     <RouterView />
   </main>
 </template>
+
+<script setup lang="ts">
+import Header from './components/Header.vue'
+</script>
 
 <style>
 .header {
