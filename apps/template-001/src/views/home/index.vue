@@ -40,8 +40,8 @@ const games = ref([
 onMounted(async () => {
   console.log('router--', router)
   
-  const data = await queryGameAssortList()
-  console.log('data--', data)
+  // const data = await queryGameAssortList()
+  // console.log('data--', data)
 })
 </script>
 

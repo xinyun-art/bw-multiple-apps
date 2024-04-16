@@ -1,5 +1,5 @@
 <template>
-  <div class="header">
+  <header class="header">
     <div class="logo">
       <img
         class="logo__img"
@@ -8,15 +8,17 @@
       />
     </div>
     <nav class="header-nav">
+      <div ref="navPointerRef" class="navbar__pointer" :style="{width: navPointerWidth + 'px', left: navPointerOffset + 'px'}"></div>
       <ul class="navbar__list">
+        <!-- @mouseenter="onMouseEnterNav(nav)"
+        @mouseleave="onMouseLeaveNav" -->
         <li
+          ref="navItemRefs"
           v-for="(nav, index) in navList"
           :key="nav.id"
           class="navbar__item"
           :class="{ 'navbar__item--active': navIndex === index }"
           @click="onChangeNavItem(index)"
-          @mouseenter="onMouseEnterNav(nav)"
-          @mouseleave="onMouseLeaveNav"
         >
           <span>{{ nav.name }}</span>
           <span class="icon-arrow"></span>
@@ -41,7 +43,7 @@
         </ul>
       </div>
     </transition>
-  </div>
+  </header>
 </template>
 
 <script setup lang="ts">
@@ -71,7 +73,7 @@ const navList = ref<Nav[]>([
   },
   {
     id: 1,
-    name: '滚球',
+    name: '滚球&体育',
     typeCode: 'in-play'
   },
   {
@@ -117,7 +119,7 @@ const navList = ref<Nav[]>([
   },
   {
     id: 6,
-    name: '电游',
+    name: '电子竞技',
     typeCode: 'esports',
     venueList: [{ id: 0, venueName: 'esports_cq9', venueCode: 'esports_cq9', imageAddress: '' }]
   },
@@ -144,9 +146,30 @@ const navList = ref<Nav[]>([
 const navIndex = ref<number>(0)
 const downMenus = ref<Venue[]>([])
 let isShowDownMenus = ref<boolean>(false)
+const navPointerRef = ref(null)
+const navItemRefs = ref([])
+let navPointerWidth = ref(0)
+let navPointerOffset = ref(0)
+
+const getNavPointerWidth = (index) => navItemRefs.value[index].offsetWidth
+const getNavPointerOffset = (index) => {
+  const navItemWidths = navItemRefs.value.map(item => item.offsetWidth)
+  let offset = 0
+  for (let i = 0; i < index; i++) {
+    offset += navItemWidths[i]
+  }
+  return offset
+}
+
+const tanslation = (index) => {
+  navPointerOffset.value = 0
+  navPointerWidth.value = getNavPointerWidth(index)
+  navPointerOffset.value = getNavPointerOffset(index)
+}
 
 const onChangeNavItem = (index: number): void => {
   navIndex.value = index
+  tanslation(index)
 }
 const onMouseEnterNav = (nav: Nav): void => {
   const { venueList } = nav
@@ -158,6 +181,10 @@ const onMouseLeaveNav = (): void => {
   if (!isShowDownMenus.value) return
   isShowDownMenus.value = false
 }
+
+onMounted(() => {
+  navPointerWidth.value = getNavPointerWidth(0)
+})
 </script>
 
 <style lang="scss">
@@ -224,23 +251,36 @@ const onMouseLeaveNav = (): void => {
     height: 100%;
   }
   .header-nav {
+    position: relative;
     height: 100%;
     margin-left: 30px;
   }
+  .navbar__pointer {
+    position: absolute;
+    top: 50%;
+    z-index: 1;
+    height: 40px;
+    background-color: khaki;
+    border-radius: 25px;
+    transform: translateY(-50%);
+    transition: left .5s ease;
+  }
   .navbar__list {
+    position: relative;
+    z-index: 9;
     height: 100%;
     display: flex;
   }
   .navbar__item {
     height: 100%;
-    padding: 0 10px;
+    padding: 0 20px;
     opacity: 0.5;
     cursor: pointer;
     display: flex;
     align-items: center;
-    &:not(:first-child) {
-      margin-left: 10px;
-    }
+    // &:not(:first-child) {
+    //   margin-left: 10px;
+    // }
     &--active {
       opacity: 1;
     }
