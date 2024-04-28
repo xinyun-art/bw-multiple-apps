@@ -37,6 +37,7 @@ function autoLoadFile(directory, useSubdirectories = false, extList = ['.js']) {
 }
 // 自动获取同目录下的json文件夹下的json文件
 const fileList = autoLoadFile(path.join(__dirname, '../src/i18n/json'), true, ['.json'])
+console.log('fileList--', fileList)
 
 let data = [] // json2xls需要的数据格式: [{zh: "我是中文", en: "i am chinese"}]
 fileList.forEach((_, i) => {
