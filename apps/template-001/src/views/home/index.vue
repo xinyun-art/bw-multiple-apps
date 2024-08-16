@@ -1,10 +1,10 @@
 <template>
   <div class="home">
     <div class="banner text-3xl font-bold underline">
-      {{ $t('这是banner') }}
+      {{ $t('这是版了') }}
     </div>
     <div class="game">
-      {{ $t('这是content') }}
+      {{ $t('这是康腾特') }}
       <HelloWorld msg="It is message" />
       <ul>
         <li v-for="item in games" :key="item.id">
