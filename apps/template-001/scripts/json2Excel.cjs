@@ -55,6 +55,6 @@ fileList.forEach((_, i) => {
     }
   }
 })
-console.log('data--', data)
+// console.log('data--', data)
 // 导出excel文件
 fs.writeFileSync('./src/i18n/i18n.xlsx', json2xls(data), 'binary')
