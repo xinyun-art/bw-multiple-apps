@@ -17,6 +17,7 @@
 
 <script setup lang="ts">
 import { queryGameAssortList } from '@/apis/game'
+import { setTheme } from '@/utils/themeConfig'
 
 const instance = getCurrentInstance()
 const $t = instance?.proxy?.$t
