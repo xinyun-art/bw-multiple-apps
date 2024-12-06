@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="22px" height="22px" viewBox="0 0 22 22" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 63.1 (92452) - https://sketch.com -->
+    <title>zuo_lan_hong</title>
+    <desc>Created with Sketch.</desc>
+    <g id="页面-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="珠盘" transform="translate(-922.000000, -267.000000)">
+            <g id="zuo_lan_hong" transform="translate(922.000000, 267.000000)">
+                <path d="M12,19 C15.8659932,19 19,15.8659932 19,12 C19,8.13400675 15.8659932,5 12,5 C12,3.93510613 11.7622117,2.92575068 11.3368362,2.02213466 C11.5553756,2.00731024 11.7768341,2 12,2 C17.5228475,2 22,6.4771525 22,12 C22,17.5228475 17.5228475,22 12,22 C6.4771525,22 2,17.5228475 2,12 C2,11.7768341 2.00731024,11.5553756 2.02170431,11.3358509 C2.92575068,11.7622117 3.93510613,12 5,12 C5,15.8659932 8.13400675,19 12,19 Z" id="形状结合" fill="#1E51B4"></path>
+                <circle id="椭圆形" fill="#D82E20" cx="5" cy="5" r="5"></circle>
+            </g>
+        </g>
+    </g>
+</svg>
