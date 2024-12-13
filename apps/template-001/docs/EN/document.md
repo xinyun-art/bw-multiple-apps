@@ -3,3 +3,6 @@ https://english.cool/ordinal-numbers/
 
 # 实时翻译软件
 https://www.aiphone.ai/blog/zh/voice-voice-translation-app/
+
+Vue
+https://www.youtube.com/watch?v=KNZqBu9-FVQ&list=PL5FIFxLsMtxSDnyaMGT8H6qHq8rfZkjE3
