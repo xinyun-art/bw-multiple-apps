@@ -7,11 +7,14 @@ https://18.162.240.140
 Curt
 wORfJWM24Mk4rVQY 
 你的vpn账号，海外远程的期间使用，大陆禁止使用
+新：Curt  Curt@Curt22
 
 风控后台
 qa2
 curt001
 cuet123456.
+
+https://www.imangoim3.com/
 
 https://www.edaoavip.com/
 js61358  	qwertasz521
@@ -46,10 +49,15 @@ dev:
 密码：77j#Uz8YpiKixyPn
 
 
+sudo vi /etc/hosts
+访问jira和confluence，将以下加入hosts
+16.162.129.110 jumpserver.bdgatewaynet.com confluence.bdgatewaynet.com  jira.bdgatewaynet.com
 
 jira和confluence(https://confluence.bdgatewaynet.com)
 curt c88888888
 
+待上线总需求：https://confluence.bdgatewaynet.com/pages/viewpage.action?pageId=97560329
+web组文档：https://confluence.bdgatewaynet.com/pages/viewpage.action?pageId=84607809
 jira bug看板：https://jira.bdgatewaynet.com/secure/RapidBoard.jspa?rapidView=74&projectKey=OB&selectedIssue=BWCS-15007&quickFilter=313&quickFilter=528#
 jira bug看板（备用）：https://jira.bdgatewaynet.com/issues/?filter=-1&jql=issuetype%20%3D%20%E6%95%85%E9%9A%9C%20AND%20resolution%20%3D%20Unresolved%20AND%20assignee%20in%20(currentUser())%20order%20by%20updated%20DESC
 Jira登记任务工时面板：https://jira.bdgatewaynet.com/secure/RapidBoard.jspa?rapidView=101&projectKey=OBQJ&view=detail&selectedIssue=OBYF-92724&quickFilter=514
